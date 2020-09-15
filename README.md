@@ -68,4 +68,16 @@ kubeadm join 172.31.14.217:6443 --token kml3du.jgbla332mjx9hd1s \
 
 ### Installing Storage class
 
+- This would install a rancher local storage class named `standard`.  
+- kubectl apply -f https://raw.githubusercontent.com/bhartiroshan/kubeadmsetup/master/local-path-storage.yaml
 
+## Your kubernetes cluster is ready now. 
+
+- kubectl get nodes
+
+```
+NAME                                           STATUS   ROLES    AGE     VERSION
+ip-172-xx-xx-217.ap-south-1.compute.internal   Ready    master   7h58m   v1.19.1
+ip-172-xx-xx-208.ap-south-1.compute.internal   Ready    <none>   7h32m   v1.19.1
+ip-172-xx-xx-29.ap-south-1.compute.internal     Ready    <none>   7h11m   v1.19.1
+```
