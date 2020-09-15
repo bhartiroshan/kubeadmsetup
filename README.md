@@ -2,7 +2,7 @@
 
 # Instructions 
 
-## Step 1 on Master node:
+### Step 1 on Master node:
 
 ### Spin up Master/Worker nodes:
 - For example 1 Master 2 Workers(below are the specs that I used)/
