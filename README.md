@@ -44,7 +44,7 @@ EOF
 
 ### Initialize Kube control plane using kubeadm
 
-- kubeadm init --pod-cidr-network=10.240.0.0/16
+```kubeadm init --pod-network-cidr=10.240.0.0/16```
 - This command would leave below results, see example.
 ```
 kubeadm join 172.31.14.217:6443 --token kml3du.jgbla332mjx9hd1s \
