@@ -51,6 +51,8 @@ kubeadm join 172.31.14.217:6443 --token kml3du.jgbla332mjx9hd1s \
      --discovery-token-ca-cert-hash sha256:shacode 
 ```
 
+### Follow instructions to create kube config
+
 ## Step 2 on Worker nodes:
 - Follow all steps mentioned in Master nodes except for `kubeadm init` part. 
 - use the `kubeadm join` command from master node to join the cluster. 
