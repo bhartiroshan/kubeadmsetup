@@ -28,8 +28,18 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 ```
 
-- yum install -y kubelet kubeadm kubectl docker 
-- systemctl enable kubelet && systemctl start kubelet && systemctl start docker && systemctl enable docker
+- Install the packages
+```
+yum install -y kubelet kubeadm kubectl docker 
+systemctl enable kubelet && systemctl start kubelet && systemctl start docker && systemctl enable docker
+```
+
+- You might hit issues starting kubelet service, so you need to change cgroup-driver to `cgroupfs`.
+```
+vi /var/lib/kubelet/config.yam
+#Change below to
+cgroupDriver: systemd
+```
 
 ## Disable SElinux
 ```
@@ -44,7 +54,7 @@ EOF
 
 ### Initialize Kube control plane using kubeadm
 
-```kubeadm init --pod-network-cidr=10.240.0.0/16```
+```kubeadm init --pod-network-cidr=10.240.0.0/16 --service-dns-domain aws.com```
 - This command would leave below results, see example. Also follow instructions to create kube config
 ```
 kubeadm join 172.31.14.217:6443 --token kml3du.jgbla332mjx9hd1s \
@@ -62,14 +72,18 @@ kubeadm join 172.31.14.217:6443 --token kml3du.jgbla332mjx9hd1s \
 - At this point your cluste is setup but the coredns pods may still be in pending state. 
 - You need to install pod network. 
 - You can install weavenet or other CNIs. 
--  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
 
 ## Step 4:
 
 ### Installing Storage class
 
 - This would install rancher local storage class named `standard` and will be the default storage class.  
-- kubectl apply -f https://raw.githubusercontent.com/bhartiroshan/kubeadmsetup/master/local-path-storage.yaml
+```
+kubectl apply -f https://raw.githubusercontent.com/bhartiroshan/kubeadmsetup/master/local-path-storage.yaml
+```
 
 ## Your kubernetes cluster is ready now. 
 
