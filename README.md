@@ -38,7 +38,7 @@ systemctl enable kubelet && systemctl start kubelet && systemctl start docker &&
 ```
 vi /var/lib/kubelet/config.yam
 #Change below to
-cgroupDriver: systemd
+cgroupDriver: cgroupfs
 ```
 
 ## Disable SElinux
